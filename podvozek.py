@@ -6,9 +6,9 @@ from senzory import Senzory
 # Třída pro ovládání podvozku robota
 class Podvozek:
 
-    pomalu_rychlost = 60
+    pomalu_rychlost = 70
     normalne_rychlost = 100
-    rychle_rychlost = 125
+    rychle_rychlost = 140
 
     def __init__(self, driver_motor: PCA9633) -> None:
         self.levy_motor = Motor(KonstantyMotory.levy, driver_motor)

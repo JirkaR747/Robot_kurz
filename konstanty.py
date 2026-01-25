@@ -8,8 +8,11 @@ class Konstanty:
     dopredu = "dopredu"
     dozadu = "dozadu"
 
-    #stavy
+   
 
-    st_start = "start"
-    st_vycti_senzory = "vycti_senzory"
-    st_reaguj_na_caru = "reaguj_na_caru"
+    # --- STAVY ---
+    ST_START = 0
+    ST_JED = 1
+    ST_ZATOC_VIC = 2
+    ST_STOP = 3
+    ST_ERROR = 4
