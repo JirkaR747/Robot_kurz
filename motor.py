@@ -1,6 +1,7 @@
 
 from time import sleep
 from pca9633 import PCA9633
+from konstanty_motory import KonstantyMotory
 
  
     
@@ -8,15 +9,15 @@ from pca9633 import PCA9633
 # Třída pro ovládání jednoho motoru robota
 class Motor:
 
-    def __init__(self, strana, driver: PCA9633) -> None:
+    def __init__(self, strana:KonstantyMotory, driver: PCA9633) -> None:
                  
 
         self.driver = driver
 
-        if strana == "leva":
+        if strana == KonstantyMotory.levy:
             self.kanal_vpred = self.driver.PWM3
             self.kanal_vzad = self.driver.PWM2
-        elif strana == "prava":
+        elif strana == KonstantyMotory.pravy:
             self.kanal_vpred = self.driver.PWM1
             self.kanal_vzad = self.driver.PWM0
         else:
@@ -28,17 +29,17 @@ class Motor:
 
 
     # Nastavení směru a rychlosti motoru
-    def jed(self, smer, rychlost):
+    def jed(self, smer:KonstantyMotory, rychlost:int):
         
          # Validace směru
-        if smer not in ("dopredu", "dozadu"):
+        if smer not in (KonstantyMotory.dopredu, KonstantyMotory.dozadu):
             print("Chyba: smer musí být 'dopredu' nebo 'dozadu'")
             return -1
 
        # validace rychlosti
         if not isinstance(rychlost, int) or rychlost < 0 or rychlost > 255:
             print("Chyba: rychlost musí být int 0..255")
-            return -1
+            return -2
       
         # Ochrana proti okamžité změně směru
         if (self.aktualni_smer is not None and self.aktualni_smer != smer and self.aktualni_rychlost > 0):                                          
@@ -59,13 +60,13 @@ class Motor:
         self.aktualni_rychlost = 0       
 
     # Interní metoda pro nastavení motoru   
-    def _nastav_motor(self, smer, rychlost):
+    def _nastav_motor(self, smer:KonstantyMotory, rychlost:int):
         
         # Výběr kanálů podle směru
-        if smer == "dopredu":
+        if smer == KonstantyMotory.dopredu:
             self.driver.set_pwm(self.kanal_vpred, self.kanal_vzad, rychlost)
            
-        elif smer == "dozadu":
+        elif smer == KonstantyMotory.dozadu:
             self.driver.set_pwm(self.kanal_vzad, self.kanal_vpred, rychlost)   
         else:
             print("Chyba: Neplatný směr motoru")

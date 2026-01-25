@@ -9,7 +9,7 @@ class PCA9633:
         self.PWM1 = b"\x03"
         self.PWM2 = b"\x04"
         self.PWM3 = b"\x05"
-        self.max_pwm_value = 127
+        self.max_pwm_value = 200
         self.i2c = i2c
         self.inicializace_ok = self.inicializace_zarizeni()==0
         
