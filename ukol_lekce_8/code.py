@@ -1,6 +1,8 @@
-from picoed import button_b, button_a
+from picoed import button_b, button_a, display
 from time import sleep
 from math import pi
+from baterie import Baterie
+
 
 from robot import Robot
 from konstanty import Konstanty
@@ -20,6 +22,26 @@ def inicializace(muj_robot):
     muj_robot.zastav()
 
     #dobrovolny krok vycitat napeti
+    baterie=Baterie()
+    
+    if baterie.stav() < 5.5:    #baterie je slaba, ale stale pouzitelna, upozorni uzivatele
+        
+        while not button_b.was_pressed(): 
+            display.show(baterie.stav())
+            sleep(0.1)
+        display.clear()
+
+        if baterie.stav() < 3.9:
+         return -3          #baterie je tak slaba, ze by se mohl robot pri pohybu vypnout, nelze pokračovat
+        
+        
+    
+
+
+         
+    
+    
+
 
     #kalibrace
     min_pwm = 50
