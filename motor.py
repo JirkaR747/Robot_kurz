@@ -37,7 +37,7 @@ class Motor:
             return -1
 
        # validace rychlosti
-        if not isinstance(rychlost, int) or rychlost < 0 or rychlost > 255:
+        if rychlost < 0 or rychlost > 255:
             print("Chyba: rychlost musí být int 0..255")
             return -2
       

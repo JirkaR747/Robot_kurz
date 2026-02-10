@@ -35,7 +35,6 @@ class PCA9633:
             self.i2c.writeto(self.address, b'\x00\x01')
             self.i2c.writeto(self.address, b'\xE8\xAA')
             self.i2c.unlock()
-            sleep(0.1)
             return 0
         else:
             print("Nepodarilo se zamknout i2c")
